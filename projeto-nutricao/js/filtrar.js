@@ -12,8 +12,8 @@ inputProcurar.addEventListener('input', function(){
 
 		tabela_paciente.forEach(function(paciente){
 			var tbNome = paciente.querySelector('.info-nome').textContent;
-
-			if(tbNome != palavraBuscada){
+			var expressaoRegular = new RegExp(palavraBuscada, "i");
+			if(!expressaoRegular.test(tbNome)){
 				paciente.classList.add("invisivel");
 			}else{
 				paciente.classList.remove("invisivel");
