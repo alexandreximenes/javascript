@@ -12,25 +12,21 @@ adicionarPaciente.addEventListener("click", function(event){
 	//Extrai as informações dos inputs do formulario
 	var paciente = obterDadosDoFormulario(form);
 
+	//Se os dados não foram preenchidos, não serão incluidos na tabela
 	if(!dadosForamPreenchidos(form)){
 		alert("Preencha os campos corretamente!");
 		return;
 	}
 
+	// verifica se houve algum erro na validação do paciente
 	var erros = validaPaciente(paciente);
 	var ul = document.querySelector("#mensagem-erro");
 	ul.innerHTML = "";
 
+	// Se NÂO houver erros, se estiver tudo preenchido corretamente, adiciona na tabela.
 	if(erros.length <= 0){
-		// Cria uma linha da tabela com as colunas respectivamente do paciente
-		var tr = criaTabela(paciente);
-
-		//Obtem a tabela do index.html
-		var tabela_paciente = document.querySelector("#tabela-pacientes");
-		
-		//Adiciona a linha tr com as colunas td e adiciona como filha na tabela #tabela-pacientes
-		tabela_paciente.appendChild(tr);
-
+		adicionaPacientesNaTabela(paciente);
+		//Formulario em branco novamente com foco no campo nome para novo preenchimento
 		form.reset();
 		form.nome.focus();
 	}else{
@@ -39,8 +35,23 @@ adicionarPaciente.addEventListener("click", function(event){
 	
 });
 
-function mostraMensagemDeErro(Erros){
+/**
+Adiciona pacientes na tabela
+*/
+function adicionaPacientesNaTabela(paciente){
 
+	// Cria uma linha da tabela com as colunas respectivamente do paciente
+	var tr = criaTabela(paciente);
+
+	//Obtem a tabela do index.html
+	var tabela_paciente = document.querySelector("#tabela-pacientes");
+	
+	//Adiciona a linha tr com as colunas td e adiciona como filha na tabela #tabela-pacientes
+	tabela_paciente.appendChild(tr);
+}
+
+function mostraMensagemDeErro(Erros){
+	// adiciona os erros encontrados em uma lista ul > li
 	var ul = document.querySelector("#mensagem-erro");
 	Erros.forEach(function(erro){
 		var li = document.createElement("li");
@@ -49,7 +60,7 @@ function mostraMensagemDeErro(Erros){
 	});
 	return ul;
 }
-
+// valida o peso, altura e gordura, altura
 function validaPaciente(paciente){
 
 	var PESO_INVALIDO = "Peso é inválido!";
@@ -66,6 +77,7 @@ function validaPaciente(paciente){
 
 }
 
+// valida se os dados foram preenchidos
 function dadosForamPreenchidos(form) {
 	if(form.nome.value != "" && form.peso.value != "" && form.altura.value != "" && form.gordura.value != ""){
 		return true;

@@ -25,7 +25,18 @@ buscarPacientes.addEventListener('click', function(event){
 		var response = xhr.responseText;
 		//dados recebidos
 		console.log(response);
+		//verifica o tipo do dado recebido (string)
+		console.log(typeof response);
+		//Faz um parser do array recebido em formato json para um array do tipo paciente
+		var pacientes = JSON.parse(xhr.responseText);
+
+		//Adiciona na tabela todos os pacientes vindos do servidor
+		pacientes.forEach(function(paciente){
+			adicionaPacientesNaTabela(paciente);
+		});
 		
+
+
 
 	});
 
