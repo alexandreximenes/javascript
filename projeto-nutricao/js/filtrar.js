@@ -36,15 +36,11 @@ inputProcurar.addEventListener('input', function(){
 	}else{
 		// Caso não tenha nenhuma letra digitada no input, faz aparecer todos para que possa ser buscado
 		tabela_paciente.forEach(function(paciente){
+			// Para cada paciente (linha da tabela) remova a classe invisivel
 			paciente.classList.remove("invisivel");
 		});
 	}
 	
 	
 
-});
-
-inputProcurar.addEventListener('select', function(){
-	console.log(this.value);
-	//this.value.select();
 });

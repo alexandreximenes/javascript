@@ -15,28 +15,37 @@ buscarPacientes.addEventListener('click', function(event){
 
 	// Cria um objeto do tipo XMLHttpRequest
 	var xhr = new XMLHttpRequest();
+	
+	// url especificada, poderia ser qualquer uma que trabalhasse com REST ou disponibilizasse um recurso em AJAX
+	var url = 'https://api-pacientes.herokuapp.com/pacientes';
 
 	// Abre a conexão, manda requisição do tipo GET e tenta buscar os dados na url especificada
-	xhr.open('GET', 'https://api-pacientes.herokuapp.com/pacientes');
+	xhr.open('GET', url);
 	
 	// Quando os dados estiverem carregados (load) do servidor, executa o evento da função anonima
 	xhr.addEventListener('load', function(){
 
-		var response = xhr.responseText;
-		//dados recebidos
-		console.log(response);
-		//verifica o tipo do dado recebido (string)
-		console.log(typeof response);
-		//Faz um parser do array recebido em formato json para um array do tipo paciente
-		var pacientes = JSON.parse(xhr.responseText);
+		try{
+			//Somente se tudo ocorrer bem, status 200 e 301
+			if( xhr.status == 200 || xhr.status == 301){
+				var response = xhr.responseText;
+				//dados recebidos
+				console.log(response);
+				//verifica o tipo do dado recebido (string)
+				console.log(typeof response);
+				//Faz um parser do array recebido em formato json para um array do tipo paciente
+				var pacientes = JSON.parse(xhr.responseText);
 
-		//Adiciona na tabela todos os pacientes vindos do servidor
-		pacientes.forEach(function(paciente){
-			adicionaPacientesNaTabela(paciente);
-		});
-		
-
-
+				//Adiciona na tabela todos os pacientes vindos do servidor
+				pacientes.forEach(function(paciente){
+					adicionaPacientesNaTabela(paciente);
+				});
+			}else{
+				console.log('Erro ao fazer requisição get na url ' + url);
+			}
+		}catch(Error){
+			console.log(Error);
+		}
 
 	});
 

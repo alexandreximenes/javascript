@@ -7,9 +7,18 @@ Porpositalmente foi incluido manualmente alguns dados invalidos para o sistema v
 var pacientes = document.querySelectorAll('.paciente');
 var arrayPacientes = pacientes.length;
 
+// usado para validar os dados do paciente 
+let _MIN_PESO = 0;
+let _MAX_PESO = 1000;
+let _MIN_ALTURA = 0;
+let _MAX_ALTURA = 3.00;
+let _MIN_GORDURA = 0;
+let _MAX_GORDURA = 1000;
+
 for(var i = 0 ; i < arrayPacientes ; i++){
 	var paciente = pacientes[i];
 
+	//captura as informações do cliente
 	var tdPeso = paciente.querySelector('.info-peso').textContent;
 	var tdAltura = paciente.querySelector('.info-altura').textContent;
 	var tdGordura = paciente.querySelector('.info-gordura').textContent;
@@ -29,31 +38,34 @@ for(var i = 0 ; i < arrayPacientes ; i++){
 	 	}
 }
 
+// realiza o calculo do IMC do paciente e retorna com o resultado
 function calculaImc(peso, altura){
 	return (peso / (altura * altura)).toFixed(2);
 }
 
+// valida o peso entre 0 e 1000 e retorna com o resultado
 function pesoValido(peso){
 
-	if(peso <= 0 || peso >= 1000){
+	if(peso <= _MIN_PESO || peso >= _MAX_PESO){
 		mensagemIMC("Peso inválido!");
 		return false;
 	}
 	return true;
 }
+// valida a altura entre 0 e 3.0
 function alturaValida(altura){
 
-	if(altura <= 0 || altura >= 3.00){
+	if(altura <= _MIN_ALTURA || altura >= _MAX_ALTURA){
 		mensagemIMC("Altura inválida!");	
 		return false;
 	}
 	return true;
 
 }
-
+// valida a gordura entre 0 e 1000
 function gorduraValida(gordura){
 
-	if(gordura <= 0 || peso >= 1000){
+	if(gordura <= _MIN_GORDURA || gordura >= _MAX_GORDURA){
 		mensagemIMC("Gordura inválida!");
 		return false;
 	}
@@ -61,7 +73,7 @@ function gorduraValida(gordura){
 }
 
 
-
+// exibe mensagem no corpo do html
 function mensagemIMC(msg){
 	tdIMC.textContent = msg;		
 }
