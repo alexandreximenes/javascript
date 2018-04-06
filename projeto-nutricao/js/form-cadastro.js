@@ -1,6 +1,6 @@
-//7 - atividade 6 animando e removendo paciente da tabela; 
 /*
-	Evento do botão adicionar paciente id = adicionar-paciente
+* @autor Alexandre Ximenes
+* Evento do botão adicionar paciente id = adicionar-paciente
 */
 var adicionarPaciente = document.querySelector("#adicionar-paciente");
 adicionarPaciente.addEventListener("click", function(event){

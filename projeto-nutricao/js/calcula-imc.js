@@ -1,4 +1,9 @@
-
+/**
+@autor Alexandre Ximenes
+Responsavel por calcular os IMC's (peso / (altura * altura))
+Percorre todos os tr da table e faz o calculo, inserindo na td IMC
+Porpositalmente foi incluido manualmente alguns dados invalidos para o sistema validar peso e altura
+*/
 var pacientes = document.querySelectorAll('.paciente');
 var arrayPacientes = pacientes.length;
 

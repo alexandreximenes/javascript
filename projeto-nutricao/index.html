@@ -1,8 +1,18 @@
+<!-- 
+	@autor Alexandre Ximenes
+	Single page  de exemplo, simulando um crud, responsavel por:
+	- listar pacientes
+	- incluir pacientes
+	- remover pacientes 
+
+Foi separado as responsabilidades em arquivos diferentes, (js, css, html)
+-->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
-		<title>Aparecida Nutrição</title>
+		<title>Departamento de Nutrição</title>
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
@@ -12,13 +22,14 @@
 
 		<header>
 			<div class="container">
-				<h1 class="titulo">Aparecida Nutrição</h1>
+				<h1 class="titulo">Departamento de Nutrição</h1>
       </div>
 		</header>
 		<main>
 			<section class="container">
 				<h2>Meus pacientes</h2>
         Procurar paciente : <input type="text" accesskey="p" autofocus="true" id="procurar" placeholder="informe o nome do paciente">
+        <!-- inicio da tabela de exibição dos dados -->
       	<table>
 					<thead>
 						<tr>
@@ -100,9 +111,11 @@
 	</form>
 </section>
 		</main>
+		<!-- arquivos javascript importados  -->
 			<script type="text/javascript" src="js/calcula-imc.js"></script>
 			<script type="text/javascript" src="js/form-cadastro.js"></script>
 			<script type="text/javascript" src="js/remover-paciente.js"></script>
 			<script type="text/javascript" src="js/filtrar.js"></script>
+			<script type="text/javascript" src="js/getWS.js"></script>
 	</body>
 </html>
