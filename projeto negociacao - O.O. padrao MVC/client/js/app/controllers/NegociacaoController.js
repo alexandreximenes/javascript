@@ -18,7 +18,7 @@ class NegociacaoController{
 	adiciona(event){
 		event.preventDefault();
 
-		console.log(typeof(this._inputData.value));
+		//console.log(typeof(this._inputData.value));
 
 		//debugger;
 		
@@ -36,12 +36,17 @@ class NegociacaoController{
 			console.table(negociacao);
 
 			/*
-				Funções abaixo, são aleatorias, não faz parte do treinamento, mas sim da aprendizegem da linguagem javascript
+			Funções abaixo, são aleatorias, não faz parte do treinamento, 
+			mas sim da aprendizegem da linguagem javascript
 			*/	
 
+			//------------------------
+			
 			//Um pouco de history
 			console.warn("history = "+history.length);
 
+			//------------------------
+			
 			// um pouco de navegator
 			var txt = "";
 			txt += "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
@@ -53,14 +58,10 @@ class NegociacaoController{
 			txt += "<p>Platform: " + navigator.platform + "</p>";
 			txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
 
-			document.querySelector('.info').innerHTML = txt;
-
-			var objeto = {
-				data: negociacao.data,
-				quantidade: negociacao.quantidade,
-				valor: negociacao.valor
-			};
-
+			document.querySelector('.info').innerHTML += txt;
+			
+			//------------------------
+			
 			//Brincando um pouco com localização
 
 			var x = document.querySelector('.info');
@@ -78,10 +79,15 @@ class NegociacaoController{
 
 			getLocation();
 
-
+			//------------------------
 
 			// um pouco de localStorage
-			
+			var objeto = {
+				data: negociacao.data,
+				quantidade: negociacao.quantidade,
+				valor: negociacao.valor
+			};
+
 			if(Storage !== "undefined"){
 				localStorage.setItem("negociacao", objeto);
 				localStorage.setItem("data", negociacao.data);
@@ -95,6 +101,8 @@ class NegociacaoController{
 			var retorno = localStorage.getItem("negociacao");
 			console.log("retorno" + retorno.data);
 
+			//------------------------
+		
 		// testando os tipos de saida do console
 		/*
 			console.info("Data  : "+negociacao.data);
