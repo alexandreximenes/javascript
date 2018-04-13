@@ -3,7 +3,10 @@ class NegociacaoController{
 	adiciona(event){
 		event.preventDefault();
 
-		let form = document.querySelector(".form");
+		// Imitando o jQuery :)
+		let $ = document.querySelector.bind(document);
+
+		let form = $(".form");
 
 		let inputData = form.data.value;
 		let inputQuantidade = form.quantidade.value;
