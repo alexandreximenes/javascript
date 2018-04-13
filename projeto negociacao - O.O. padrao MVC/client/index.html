@@ -14,7 +14,7 @@
     
     <div id="mensagemView"></div>
     
-    <form class="form">
+    <form class="form" onsubmit="negociacaoController.adiciona(event)">
         
         <div class="form-group">
             <label for="data">Data</label>
@@ -62,35 +62,12 @@
     <div id="negociacoesView"></div>
     <script src="js/index.js"></script>
     <script src="js/app/models/negociacao.js"></script>
+        <script src="js/app/controllers/NegociacaoController.js"></script>
 
-    <script type="text/javascript">
-        let n1 = new Negociacao(new Date(), 1, 10.50);
-        // Não esta funcionando, porque o objeto esta congelado
-        n1._quantidade = 13131;
-        n1._valor = 5000.000,55;
-        console.log(n1);
-        console.log(n1.volume);
+        <script type="text/javascript">
+            let negociacaoController = new NegociacaoController();
+            
+        </script>
 
-        let n2 = new Negociacao(new Date(), 2, 4444);
-        console.log(n2);
-        console.log(n2.volume);
-
-
-        // Trabalhando com data
-        // data continua imutavel
-        console.log(n2.data);
-
-        let amanha = new Date();
-        amanha.setDate(14);
-        n2._data = amanha;
-
-        console.log(n2.data);
-
-        //Esta alterando, não esta encapsulando, 
-        // porque a DATA é um objeto e Object.freeze(obj) não congela um objeto com mais atributos e metodos
-        n2.data.setDate(14);
-        console.log(n2.data);
-
-    </script>
 </body>
 </html>
