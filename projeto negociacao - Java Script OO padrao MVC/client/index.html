@@ -64,14 +64,14 @@
     <script src="js/app/models/negociacao.js"></script>
 
     <script type="text/javascript">
-        var n1 = new Negociacao(new Date(), 1, 10.50);
+        let n1 = new Negociacao(new Date(), 1, 10.50);
         // Não esta funcionando, porque o objeto esta congelado
         n1._quantidade = 13131;
         n1._valor = 5000.000,55;
         console.log(n1);
         console.log(n1.volume);
 
-        var n2 = new Negociacao(new Date(), 2, 4444);
+        let n2 = new Negociacao(new Date(), 2, 4444);
         console.log(n2);
         console.log(n2.volume);
 
@@ -80,7 +80,7 @@
         // data continua imutavel
         console.log(n2.data);
 
-        var amanha = new Date();
+        let amanha = new Date();
         amanha.setDate(14);
         n2._data = amanha;
 
