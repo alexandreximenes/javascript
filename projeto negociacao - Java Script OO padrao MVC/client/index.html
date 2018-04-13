@@ -75,6 +75,22 @@
         console.log(n2);
         console.log(n2.volume);
 
+
+        // Trabalhando com data
+        // data continua imutavel
+        console.log(n2.data);
+
+        var amanha = new Date();
+        amanha.setDate(14);
+        n2._data = amanha;
+
+        console.log(n2.data);
+
+        //Esta alterando, não esta encapsulando, 
+        // porque a DATA é um objeto e Object.freeze(obj) não congela um objeto com mais atributos e metodos
+        n2.data.setDate(14);
+        console.log(n2.data);
+
     </script>
 </body>
 </html>

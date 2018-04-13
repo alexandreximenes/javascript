@@ -2,7 +2,7 @@ class Negociacao{
 	
 	//Criando construtor com parametros
 	constructor(data, quantidade, valor){
-		this._data = data;
+		this._data = new Date( data.getTime() );
 		this._quantidade = quantidade;
 		this._valor = valor;
 
@@ -16,7 +16,8 @@ class Negociacao{
 	}
 
 	get data(){
-		return this._data;
+		//programação defensiva
+		return new Date( this._data.getTime() ).toLocaleString();
 	}
 
 	get quantidade(){
