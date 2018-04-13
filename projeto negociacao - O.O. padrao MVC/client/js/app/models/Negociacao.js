@@ -1,4 +1,4 @@
-console.time();
+console.time("Classe Negociacao");
 
 class Negociacao{
 	
@@ -32,4 +32,4 @@ class Negociacao{
 
 
 }
-console.timeEnd();
+console.timeEnd("Classe Negociacao");
