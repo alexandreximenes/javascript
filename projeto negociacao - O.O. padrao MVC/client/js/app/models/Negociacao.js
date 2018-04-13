@@ -1,3 +1,5 @@
+console.time();
+
 class Negociacao{
 	
 	//Criando construtor com parametros
@@ -17,7 +19,7 @@ class Negociacao{
 
 	get data(){
 		//programação defensiva
-		return new Date( this._data.getTime() ).toLocaleString();
+		return new Date( this._data.getTime() ).toUTCString(); //toLocaleDateString();//toISOString(); //.toJSON();  //.toUTCString() //.toLocaleString();
 	}
 
 	get quantidade(){
@@ -30,3 +32,4 @@ class Negociacao{
 
 
 }
+console.timeEnd();
