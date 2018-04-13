@@ -65,8 +65,12 @@
 
     <script type="text/javascript">
         var n1 = new Negociacao(new Date(), 1, 10.50);
+        // Não esta funcionando, porque o objeto esta congelado
+        n1._quantidade = 13131;
+        n1._valor = 5000.000,55;
         console.log(n1);
         console.log(n1.volume);
+
         var n2 = new Negociacao(new Date(), 2, 4444);
         console.log(n2);
         console.log(n2.volume);
