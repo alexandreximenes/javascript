@@ -25,9 +25,8 @@ class NegociacaoController{
 		//Spread operator
 		let data = new Date(...this._inputData.value
 			.split('-')
-			.map(function(item, indice){
-				return item - indice % 2;
-			}));
+			.map((item, indice) => item - indice % 2)
+		);
 
 		// criando um objeto Negociacao
 		let negociacao = new Negociacao(
