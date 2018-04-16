@@ -28,16 +28,16 @@ class NegociacaoController{
 			.map((item, indice) => item - indice % 2)
 		);*/
 
-		let helper = new DateHelper();
+		;
 
 		// criando um objeto Negociacao
 		let negociacao = new Negociacao(
-				helper.textoParaData(this._inputData.value),
+				DateHelper.textoParaData(this._inputData.value),
 				this._inputQuantidade.value,
 				this._inputValor.value
 			);
 			console.warn(this._inputData.value);
-			console.log(helper.dataParaTexto(new Date(this._inputData.value) ));
+			console.log("DateHelper.dataParaTexto = "+DateHelper.dataParaTexto(new Date(this._inputData.value) ));
 
 			/*console.group();
 			//console.log("Data e Time  : "+new Date(new Date().getTime()));
