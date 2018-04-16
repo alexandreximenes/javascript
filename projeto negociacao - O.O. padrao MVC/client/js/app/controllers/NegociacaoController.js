@@ -23,25 +23,29 @@ class NegociacaoController{
 		//debugger;
 
 		//Spread operator
-		let data = new Date(...this._inputData.value
+		/*let data = new Date(...this._inputData.value
 			.split('-')
 			.map((item, indice) => item - indice % 2)
-		);
+		);*/
+
+		let helper = new DateHelper();
 
 		// criando um objeto Negociacao
 		let negociacao = new Negociacao(
-				new Date(data),
+				helper.textoParaData(this._inputData.value),
 				this._inputQuantidade.value,
 				this._inputValor.value
 			);
+			console.warn(this._inputData.value);
+			console.log(helper.dataParaTexto(new Date(this._inputData.value) ));
 
-			console.group();
+			/*console.group();
 			//console.log("Data e Time  : "+new Date(new Date().getTime()));
 			console.log("Data  : "+negociacao.data);
 			console.log("Qtde  : "+negociacao.quantidade);
 			console.log("Valor : "+negociacao.valor);
 			console.groupEnd();
-			console.table(negociacao);
+			console.table(negociacao);*/
 
 	}
 
