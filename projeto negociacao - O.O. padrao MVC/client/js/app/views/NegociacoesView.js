@@ -6,7 +6,7 @@ class NegociacoesView{
 	
 	}
 
-	_template(){
+	_template(negociacao){
 		return `
 			 <table class="table table-hover table-bordered">
 		        <thead>
@@ -17,14 +17,30 @@ class NegociacoesView{
 		                <th>VOLUME</th>
 		            </tr>
 		        </thead>
-		        <tbody></tbody>
-		        <tfoot></tfoot>
+		        <tbody>
+		        	${negociacao.negociacoes.map(n => `
+        					<tr>
+        						<td>${DateHelper.dataParaTexto( new Date(n.data) )}</td>
+	        					<td>${n.quantidade}</td>
+	        					<td>${n.valor}</td>
+	        					<td>${n.volume}</td>
+        					</tr>
+		        		
+		        		`).join('')}
+		        </tbody>
+		        <tfoot>
+		        		<tr><td colspan="3">Total</td>
+		        			<td>
+		        				${negociacao.negociacoes.reduce( (total, n) => total + n.volume , 0.0).toFixed(2)}
+		        			</td>
+		        		</tr>
+		        </tfoot>
 
 		    </table>
 		`;
 	}
 
-	update(){
-		this._elemento.innerHTML = this._template();
+	update(negociacao){
+		this._elemento.innerHTML = this._template(negociacao);
 	}
 }
