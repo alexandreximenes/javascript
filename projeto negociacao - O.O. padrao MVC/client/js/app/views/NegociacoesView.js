@@ -1,12 +1,12 @@
-class NegociacoesView{
+class NegociacoesView extends View{
 
 	constructor(elemento){
 
-		this._elemento = elemento;
+		super(elemento);
 	
 	}
 
-	_template(negociacao){
+	template(negociacao){
 		return `
 			 <table class="table table-hover table-bordered">
 		        <thead>
@@ -40,7 +40,4 @@ class NegociacoesView{
 		`;
 	}
 
-	update(negociacao){
-		this._elemento.innerHTML = this._template(negociacao);
-	}
 }

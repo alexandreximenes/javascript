@@ -1,3 +1,7 @@
 .invisibleTbNegociacao{
     display:none;
 }
+.fadeOut{
+	opacity: 0;
+	transition: 3.0s;
+}
