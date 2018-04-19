@@ -9,8 +9,6 @@ class MensagemView extends View{
 		return model.texto ? p : `<p></p>`;
 	}
 
-	
-
 	displayNone($){
 		let div = $('.mensagemView');
 		let p = $('.mensagem');
