@@ -60,26 +60,29 @@
 
         <script type="text/javascript">
             let negociacaoController = new NegociacaoController();
-
         </script>
-        <script>
-            let lista = new Proxy(new ListaNegociacoes(), {
-                get(target, prop, receiver){
-                    if( ['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function) ) 
-                    {
-                        return function(){
-                            console.log(`interceptando ${prop}`);
-                            Reflect.apply(target[prop], target, arguments);
-                        }
-                    }
-                    return Reflect.get(target, prop, receiver);
-                }
-            
-            });
-            lista.adiciona(new Negociacao(new Date(), 1, 100));
-        </script>
+       
         <script src="js/praticandoFuncoes.js"></script>
         <script src="js/app/helpers/DateHelper.js"></script>
+
+
+
+        <!-- <script>
+                    /*let lista = new Proxy(new ListaNegociacoes(), {
+                        get(target, prop, receiver){
+                            if( ['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function) ) 
+                            {
+                                return function(){
+                                    console.log(`interceptando ${prop}`);
+                                    Reflect.apply(target[prop], target, arguments);
+                                }
+                            }
+                            return Reflect.get(target, prop, receiver);
+                        }
+                    
+                    });
+                    lista.adiciona(new Negociacao(new Date(), 1, 100));*/
+                </script> -->
 
 </body>
 </html>

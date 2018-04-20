@@ -16,8 +16,14 @@ class ListaNegociacoes{
 		this._listaNegociacoes = [];
 	}
 
+	tamanho(){
+		return this._listaNegociacoes.length;
+	}
+
+
 	get imprime(){
 		console.clear();
+		console.log(this._listaNegociacoes.length);
 		this._listaNegociacoes.forEach(negociacao => {
 			console.log(negociacao);
 		});
