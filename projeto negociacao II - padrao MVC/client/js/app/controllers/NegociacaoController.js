@@ -9,8 +9,10 @@ class NegociacaoController{
 		let $ = document.querySelector.bind(document);
 		this._inputData = $('#data');
 		this._inputQuantidade = $('#quantidade');
-		this._inputValor = $('#valor');	             //this é contexto(class NegociacaoController )    
-		this._listaNegociacoes = new ListaNegociacoes( this, model => this._negociacoesView.update(model) );
+		this._inputValor = $('#valor');	 
+		//passando this implicitamente que é o contexto(class NegociacaoController )    
+		//this._listaNegociacoes = new ListaNegociacoes( model => this._negociacoesView.update(model) );
+		this._listaNegociacoes = new ListaNegociacoes();
 		this._negociacoesView = new NegociacoesView($('.negociacoesView'));
 		this._mensagem = new Mensagem();
 		this._mensagemView = new MensagemView($('.mensagemView'));
@@ -82,6 +84,3 @@ console.timeEnd("Classe NegociacaoController");
 			console.log("Valor : "+negociacao.valor);
 			console.groupEnd();
 			console.table(negociacao);*/
-
-
-

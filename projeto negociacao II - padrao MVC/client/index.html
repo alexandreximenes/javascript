@@ -62,6 +62,16 @@
             let negociacaoController = new NegociacaoController();
 
         </script>
+        <script>
+            let lista = new Proxy(new ListaNegociacoes(), {
+                set: function(target, prop, value, receiver){
+                    console.log(`o valor anterior é ${target[prop]}, o novo valor é ${value}`);
+                    return Reflect.set(target, prop, value, receiver);
+                }
+            
+            });
+            lista.adiciona(new Negociacao(new Date(), 1, 100));
+        </script>
         <script src="js/praticandoFuncoes.js"></script>
         <script src="js/app/helpers/DateHelper.js"></script>
 
