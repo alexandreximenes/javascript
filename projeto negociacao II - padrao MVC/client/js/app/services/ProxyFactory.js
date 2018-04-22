@@ -2,7 +2,7 @@ class ProxyFactory{
 
 	static create(objeto, props, acao){
 
-		return new Proxy(new ListaNegociacoes(), 
+		return new Proxy(objeto, 
 		{ 
 			get(target, prop, receiver) {
 				if ( props.includes(prop) && typeof(target[prop]) == typeof(Function) ) 
