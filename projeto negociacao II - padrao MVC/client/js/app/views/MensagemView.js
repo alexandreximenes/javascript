@@ -13,9 +13,9 @@ class MensagemView extends View{
 
 	displayNone($){
 		let p = $('.mensagem');
-		
+		let div = $('.mensagemView');
 		setTimeout(function(){
-			this._div.classList.add('fadeOut');
+			div.classList.add('fadeOut');
 		},3000);
 
 		setTimeout(function(){
