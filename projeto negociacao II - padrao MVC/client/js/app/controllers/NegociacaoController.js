@@ -43,13 +43,47 @@ class NegociacaoController {
     service.obterNegociacaoDaSemana((err, negociacoes) => {
         
       if(err){
-        this._mensagem.texto = err;
+        this._mensagem.texto = "Não foi possivel obter negociacoes";
+        this._mensagemView.update(this._mensagem);
         console.log(err);
         return;
       }
 
       negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
       this._mensagem.texto = "Negociacoes adicionadas com sucesso.";
+      this._mensagemView.update(this._mensagem);
+    });
+
+
+    service.obterNegociacaoDaSemanaAnterior((err, negociacoes) => {
+      if (err) {
+        this._mensagem.texto = "Não foi possivel obter negociacoes";
+        this._mensagemView.update(this._mensagem);
+        console.log(err);
+        return;
+      }
+
+      negociacoes.forEach(negociacao =>
+        this._listaNegociacoes.adiciona(negociacao)
+      );
+      this._mensagem.texto = "Negociacoes adicionadas com sucesso.";
+      this._mensagemView.update(this._mensagem);
+    });
+
+    
+    service.obterNegociacaoDaSemanaRetrasada((err, negociacoes) => {
+      if (err) {
+        this._mensagem.texto = "Não foi possivel obter negociacoes";
+        this._mensagemView.update(this._mensagem);
+        console.log(err);
+        return;
+      }
+
+      negociacoes.forEach(negociacao =>
+        this._listaNegociacoes.adiciona(negociacao)
+      );
+      this._mensagem.texto = "Negociacoes adicionadas com sucesso.";
+      this._mensagemView.update(this._mensagem);
     });
   }
 
