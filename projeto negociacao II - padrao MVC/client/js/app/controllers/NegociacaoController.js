@@ -1,72 +1,83 @@
 //Testando a performance do carregamento
 console.time("Classe NegociacaoController");
 
-class NegociacaoController{
+class NegociacaoController {
+  constructor() {
+    // Imitando o jQuery :)
+    let $ = document.querySelector.bind(document);
+    this._inputData = $("#data");
+    this._inputQuantidade = $("#quantidade");
+    this._inputValor = $("#valor");
 
-	constructor(){
+    let self = this;
 
-		// Imitando o jQuery :)
-		let $ = document.querySelector.bind(document);
-		this._inputData = $('#data');
-		this._inputQuantidade = $('#quantidade');
-		this._inputValor = $('#valor');	 
-		
-		let self = this;
-		
-		this._listaNegociacoes = new Bind(new ListaNegociacoes(), new NegociacoesView($(".negociacoesView")), "adiciona", "esvazia");
+    this._listaNegociacoes = new Bind(
+      new ListaNegociacoes(),
+      new NegociacoesView($(".negociacoesView")),
+      "adiciona",
+      "esvazia"
+    );
 
-		this._mensagemView = new MensagemView($('.mensagemView'));
-		
-		this._mensagem = new Bind(new Mensagem(), this._mensagemView, "texto");
-		
-		this._mensagemView.update(this._mensagem);
+    this._mensagemView = new MensagemView($(".mensagemView"));
 
-	}
+    this._mensagem = new Bind(new Mensagem(), this._mensagemView, "texto");
 
-	adiciona(event){
-		event.preventDefault();
+    this._mensagemView.update(this._mensagem);
+  }
 
-		// criando um objeto Negociacao
-		this._listaNegociacoes.adiciona(this._criaNegociacao());
-		//this._listaNegociacoes.imprime;
-		this._mensagem = new Mensagem("Negociação adicionada com sucesso!");
-		this._mensagemView.update(this._mensagem);
-		this._mensagemView.displayNone($);
-		this._limpaFormulario();
-			
+  adiciona(event) {
+    event.preventDefault();
 
-	}
+    // criando um objeto Negociacao
+    this._listaNegociacoes.adiciona(this._criaNegociacao());
+    //this._listaNegociacoes.imprime;
+    this._mensagem = new Mensagem("Negociação adicionada com sucesso!");
+    this._mensagemView.update(this._mensagem);
+    this._mensagemView.displayNone($);
+    this._limpaFormulario();
+  }
 
-	apaga(){
-		if(this._listaNegociacoes.tamanho() == 0){
+  importaNegociacoes(){
+    let service = new NegociacaoService();
+    
+    service.obterNegociacaoDaSemana((err, negociacoes) => {
+        
+      if(err){
+        this._mensagem.texto = err;
+        console.log(err);
+        return;
+      }
 
-			this._mensagem.texto = "Não existe nenhuma negociação";
-			this._mensagemView.update(this._mensagem);
-			this._mensagemView.displayNone($);
-		
-		}else{			
-		
-			this._listaNegociacoes.esvazia();
-			this._mensagem.texto = "Negociação apaga com sucesso!";
-			this._mensagemView.update(this._mensagem);
-			this._mensagemView.displayNone($);
-		}
+      negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+      this._mensagem.texto = "Negociacoes adicionadas com sucesso.";
+    });
+  }
 
-	}
-	_criaNegociacao(){
-		return new Negociacao(
-				DateHelper.textoParaData(this._inputData.value),
-				this._inputQuantidade.value,
-				this._inputValor.value
-			);
-	}
+  apaga() {
+    if (this._listaNegociacoes.tamanho() == 0) {
+      this._mensagem.texto = "Não existe nenhuma negociação";
+      this._mensagemView.update(this._mensagem);
+      this._mensagemView.displayNone($);
+    } else {
+      this._listaNegociacoes.esvazia();
+      this._mensagem.texto = "Negociação apaga com sucesso!";
+      this._mensagemView.update(this._mensagem);
+      this._mensagemView.displayNone($);
+    }
+  }
+  _criaNegociacao() {
+    return new Negociacao(
+      DateHelper.textoParaData(this._inputData.value),
+      this._inputQuantidade.value,
+      this._inputValor.value
+    );
+  }
 
-	_limpaFormulario(){
-		let form = $('.form');
-		form.reset();
-		form.data.focus();
-	}
-
+  _limpaFormulario() {
+    let form = $(".form");
+    form.reset();
+    form.data.focus();
+  }
 }
 //tempo em ms do carregamento deste arquivo (performance)
 console.timeEnd("Classe NegociacaoController");
