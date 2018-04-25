@@ -39,8 +39,50 @@ class NegociacaoController {
 
   importaNegociacoes(){
     let service = new NegociacaoService();
+
+    // REFATORAÇÃO 3
+    Promise.all(
+      [
+        service.obterNegociacaoDaSemana(),
+        service.obterNegociacaoDaSemanaAnterior(),
+        service.obterNegociacaoDaSemanaRetrasada()  
+      ]
+    ).then(negociacoes => {
+        negociacoes
+        .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+        .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+      })
+      .catch(erro => {
+        console.console.error(erro);
+      });
+
+
+    /* REFATORAÇÃO 2
+    //Trabalhando com Promisses
+    service.obterNegociacaoDaSemana()
+    .then(negociacoes => {
+      negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+    })
+    .catch(erro => console.log("Não foi possivel obter as negociações da semana " + erro));
     
-    service.obterNegociacaoDaSemana((err, negociacoes) => {
+    service.obterNegociacaoDaSemanaAnterior()
+    .then(negociacoes => {
+      negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+    })
+    .catch(erro => console.log("Não foi possivel obter as negociações da semana " + erro));
+    
+
+    service.obterNegociacaoDaSemanaRetrasada()
+    .then(negociacoes => {
+      negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+    })
+    .catch(erro => console.log("Não foi possivel obter as negociações da semana " + erro));
+    */
+
+
+
+    // REFATORAÇÃO 1
+    /*service.obterNegociacaoDaSemana((err, negociacoes) => {
         
       if(err){
         this._mensagem.texto = "Não foi possivel obter negociacoes";
@@ -84,7 +126,7 @@ class NegociacaoController {
       );
       this._mensagem.texto = "Negociacoes adicionadas com sucesso.";
       this._mensagemView.update(this._mensagem);
-    });
+    });*/
   }
 
   apaga() {
