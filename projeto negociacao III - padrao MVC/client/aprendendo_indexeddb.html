@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aprendendo IndexedDB</title>
+</head>
+<body>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script>
+
+        let connection;
+        
+        // Nome do banco : negociacoes, versao: 1 
+        var openRequest = window.indexedDB.open('negociacoesDB', 2);
+
+        openRequest.onupgradeneeded = e => {
+            console.log('cria ou altera o banco de dados');
+          
+        }
+
+        openRequest.onsuccess = e => {
+            console.log('sempre executado quando eu conseguir uma conexão');
+            
+            // Pega uma conexão IDBDatabase
+            connection = e.target.result;
+            
+        }
+
+        openRequest.onerror = e => {
+            console.log('Houve um erro >>> ' +e.target.error);
+            
+        }
+
+
+    </script>
+</body>
+</html>
