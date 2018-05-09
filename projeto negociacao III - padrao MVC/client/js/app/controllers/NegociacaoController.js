@@ -19,14 +19,23 @@ class NegociacaoController {
             
         this._ordemAtual = ''         
         
-        connectionFactory.getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.listaTodos())
-            .then(negociacoes => {
-                negociacoes.forEach(negociacao => {
-                    this._listaNegociacoes.adiciona(negociacao);
-                });
-            })
+        this._init();
+    }
+
+    _init(){
+        connectionFactory
+          .getConnection()
+          .then(connection => new NegociacaoDao(connection))
+          .then(dao => dao.listaTodos())
+          .then(negociacoes => {
+            negociacoes.forEach(negociacao => {
+              this._listaNegociacoes.adiciona(negociacao);
+            });
+          });
+
+          setInterval(() => {
+              this.importaNegociacoes();
+          },3000);
     }
     
     adiciona(event) {
