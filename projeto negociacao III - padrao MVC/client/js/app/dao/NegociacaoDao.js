@@ -54,4 +54,17 @@ class NegociacaoDao{
 
         });
     }
+
+    apagaTodos(){
+        return new Promise( (resolve, reject) => {
+            let request = this._connection
+              .transaction([this._store], "readwrite")
+              .objectStore(this._store)
+              .clear();
+
+              request.onsuccess = e => resolve('Dados apagados com sucesso!');
+
+              request.onerror = e => reject("Não foi possivel apagar os dados!");
+        });
+    }
 }
