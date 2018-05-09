@@ -58,8 +58,13 @@ class NegociacaoController {
             .obterNegociacoes()
             .then(negociacoes => 
                 negociacoes.filter(negociacao => 
-                    JSON.stringify(this._listaNegociacoes.negociacoes).indexOf(JSON.stringify(negociacao)) == -1)
-            ).then(negociacoes => negociacoes.forEach(negociacao => {
+                                        //outra forma de fazer isso
+                    !this._listaNegociacoes.negociacoes.some(negociacoesExistentes => 
+                        JSON.stringify(negociacao) == JSON.stringify(negociacoesExistentes)
+                )))
+                    // uma forma de importar negociações que ainda não estão na lista
+                    /*JSON.stringify(this._listaNegociacoes.negociacoes).indexOf(JSON.stringify(negociacao)) == -1)*/
+            .then(negociacoes => negociacoes.forEach(negociacao => {
                 this._listaNegociacoes.adiciona(negociacao);
                 this._mensagem.texto = 'Negociações do período importadas'   
             }))
