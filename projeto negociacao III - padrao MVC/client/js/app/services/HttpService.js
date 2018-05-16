@@ -1,9 +1,20 @@
 class HttpService {
     
+    _handlerError(res){
+        if(!res.ok) return new Error(res.statusText)
+        return res;
+    }
     get(url) {
         
-        return new Promise((resolve, reject) => {
-            
+        // Usando fetch api
+
+        return fetch(url)
+            .then(res => this._handlerError(res))
+            .then(res => res.json());
+
+
+        //Substituido pelo codigo acima, api fetch
+        /*return new Promise((resolve, reject) => {
 
             let xhr = new XMLHttpRequest();
             
@@ -26,7 +37,7 @@ class HttpService {
             xhr.send();
              
             
-        });
+        });*/
     }
     
     post(url, dado) {
