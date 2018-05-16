@@ -42,7 +42,14 @@ class HttpService {
     
     post(url, dado) {
 
+            return fetch(url, {
+                headers: {"Content-type" : "application/json"},
+                method: 'post',
+                body: JSON.stringify(dado)
+            })
+            .then(res => this._handlerError(res));
 
+            /*
             return new Promise((resolve, reject) => {
 
                 let xhr = new XMLHttpRequest();
@@ -62,7 +69,7 @@ class HttpService {
                     }
                 };
                 xhr.send(JSON.stringify(dado)); // usando JSON.stringifly para converter objeto em uma string no formato JSON.
-            });
+            });*/
 
         }
 }
