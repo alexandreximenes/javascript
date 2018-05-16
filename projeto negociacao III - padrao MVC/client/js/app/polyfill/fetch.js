@@ -464,3 +464,4 @@
   };
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
+//# sourceMappingURL=fetch.js.map
