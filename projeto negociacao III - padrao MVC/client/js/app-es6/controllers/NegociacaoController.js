@@ -1,3 +1,12 @@
+import {ListaNegociacoes} from '../models/ListaNegociacoes';
+import {Mensagem} from '../models/Mensagem';
+import {NegociacoesView} from '../views/NegociacoesView';
+import {MensagemView} from '../views/MensagemView';
+import {NegociacaoService} from '../services/NegociacaoService';
+import {DateHelper} from '../helpers/DateHelper';
+import {Bind} from '../helpers/Bind';
+import {Negociacao} from '../models/Negociacao';
+
 class NegociacaoController {
     
     constructor() {
@@ -17,35 +26,37 @@ class NegociacaoController {
             new Mensagem(), new MensagemView($('#mensagemView')),
             'texto');    
             
-        this._ordemAtual = ''         
-        
+        this._ordemAtual = '';
+
+        this._service = new NegociacaoService();
+
         this._init();
-    }
 
-    _init(){
-        connectionFactory
-          .getConnection()
-          .then(connection => new NegociacaoDao(connection))
-          .then(dao => dao.listaTodos())
-          .then(negociacoes => {
-            negociacoes.forEach(negociacao => {
-              this._listaNegociacoes.adiciona(negociacao);
-            });
-          });
-
-          setInterval(() => {
-              this.importaNegociacoes();
-          },3000);
     }
     
-    adiciona(event) {
-       
-        event.preventDefault();
+    _init() {
+        
+        this._service
+            .lista()
+            .then(negociacoes => 
+                negociacoes.forEach(negociacao => 
+                    this._listaNegociacoes.adiciona(negociacao)))
+            .catch(erro => this._mensagem.texto = erro);
+            
+        setInterval(() => {
+            this.importaNegociacoes();
+        }, 3000);                
+        
+    }
 
+    adiciona(event) {
+        
+        event.preventDefault();
+        
         let negociacao = this._criaNegociacao();
 
-        new NegociacaoService()
-            .cadastrar(negociacao)
+        this._service
+            .cadastra(negociacao)
             .then(mensagem => {
                 this._listaNegociacoes.adiciona(negociacao);
                 this._mensagem.texto = mensagem;
@@ -55,19 +66,9 @@ class NegociacaoController {
     }
     
     importaNegociacoes() {
-        
 
-        let service = new NegociacaoService();
-        service
-            .obterNegociacoes()
-            .then(negociacoes => 
-                negociacoes.filter(negociacao => 
-                                        //outra forma de fazer isso
-                    !this._listaNegociacoes.negociacoes.some(negociacoesExistentes => 
-                        JSON.stringify(negociacao) == JSON.stringify(negociacoesExistentes)
-                )))
-                    // uma forma de importar negociações que ainda não estão na lista
-                    /*JSON.stringify(this._listaNegociacoes.negociacoes).indexOf(JSON.stringify(negociacao)) == -1)*/
+        this._service
+            .importa(this._listaNegociacoes.negociacoes)
             .then(negociacoes => negociacoes.forEach(negociacao => {
                 this._listaNegociacoes.adiciona(negociacao);
                 this._mensagem.texto = 'Negociações do período importadas'   
@@ -77,14 +78,13 @@ class NegociacaoController {
     
     apaga() {
         
-        connectionFactory.getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.apagaTodos())
+        this._service
+            .apaga()
             .then(mensagem => {
-                this._listaNegociacoes.esvazia();
-                this._mensagem.texto = mensagem;        
-            });
-        
+                this._mensagem.texto = mensagem;
+                this._listaNegociacoes.esvazia();                
+            })
+            .catch(erro => this._mensage.texto = erro);
     }
     
     _criaNegociacao() {
@@ -112,4 +112,12 @@ class NegociacaoController {
         }
         this._ordemAtual = coluna;    
     }
+}
+
+let negociacaoController = new NegociacaoController();
+
+export function currentInstance() {
+
+    return negociacaoController;
+
 }

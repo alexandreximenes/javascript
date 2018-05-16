@@ -1,4 +1,4 @@
-class DateHelper {
+export class DateHelper {
     
     constructor() {
         
@@ -7,13 +7,14 @@ class DateHelper {
     
     static dataParaTexto(data) {
         
-        return data.toLocaleDateString();//`${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
+        return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
     }
     
     static textoParaData(texto) {
-        console.log(texto);
-        if(!/\d{4}-\d{2}-\d{2}/.test(texto)) throw new Error("Data deve estar no formato aaaa-mm-dd");
-		
-		return new Date(...texto.split('-').map((item, indice) => item - indice % 2));
+        
+        if(!/\d{2}\/\d{2}\/\d{4}/.test(texto)) 
+            throw new Error('Deve estar no formato dd/mm/aaaa');
+             
+        return new Date(...texto.split('/').reverse().map((item, indice) => item - indice % 2));
     }
 }
