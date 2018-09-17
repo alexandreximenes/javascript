@@ -1,46 +1,49 @@
-var title  = document.querySelector(".title");
+var title = document.querySelector(".title");
 title.textContent = "Projeto Nutrição";
-console.log(title);
+// console.log(title);
 
 var h1 = document.querySelector(".titulo_pagina");
 h1.textContent = "projeto Nutrição";
-console.log(h1);
-
-
-/*
-					<tr class="paciente" id="primeiro-paciente">
-							<td class="info-nome">Paulo</td>
-							<td class="info-peso">100</td>
-							<td class="info-altura">2.00</td>
-							<td class="info-gordura">10</td>
-							<td class="info-imc">0</td>
-                        </tr>
-                        */ 
+// console.log(h1);
 
 var pacientes = document.querySelectorAll(".paciente");
 
-pacientes.forEach(paciente => {
-        
-    var tdNome = paciente.querySelector(".info-nome").textContent;
-    var tdPeso = paciente.querySelector(".info-peso").textContent;
-    var tdAltura = paciente.querySelector(".info-altura").textContent;
-    var tdGordura = paciente.querySelector(".info-gordura").textContent;
-    var tdImc = paciente.querySelector(".info-imc");
+pacientes.forEach(paciente => validarPaciente(paciente) );
 
-    var isValido = true;
+function validarPaciente(paciente){
 
+    let tdNome = paciente.querySelector(".info-nome");
+    let tdPeso = paciente.querySelector(".info-peso");
+    let tdAltura = paciente.querySelector(".info-altura");
+    let tdGordura = paciente.querySelector(".info-gordura");
+    let tdImc = paciente.querySelector(".info-imc");
 
-    if(tdPeso <= 0 || tdPeso >= 1000){
-        console.log("Peso invalido!");
-        isValido = false;
+    let peso = tdPeso.textContent;
+    let altura = tdAltura.textContent;
+
+    let pesoValido = true;
+    let alturaValida = true;
+
+    if (peso <= 0 || peso >= 1000) {
+        // console.log("Peso invalido!");
+        pesoValido = false;
+        tdImc.textContent = "Peso inválido!";
+        paciente.classList.add("dados-invalidos");
     }
 
 
-    if(tdAltura <= 0 || tdAltura >= 3.5){
-        console.log("Altura invalido!");
-        isValido = false;
+    if (altura <= 0 || altura >= 3.5) {
+        // console.log("Altura invalido!");
+        alturaValida = false;
+        tdImc.textContent = "Altura inválida!";
+        paciente.classList.add("dados-invalidos");
     }
 
-    if(isValido) 
-        tdImc.textContent = (tdPeso / (tdAltura * tdAltura)).toFixed(2);    
-});
+    if (alturaValida && pesoValido)
+        tdImc.textContent = (peso / (altura * altura)).toFixed(2);
+
+}
+// Aero function
+document
+    .querySelector('.titulo_pagina')
+    .addEventListener('click', () => console.log("clicado"));
