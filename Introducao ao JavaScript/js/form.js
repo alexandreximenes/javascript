@@ -46,8 +46,6 @@ document.querySelector('#adicionar-paciente')
 
         form.reset();
         form.nome.focus();
-
-
     });
 
 function cria_li(erros){
