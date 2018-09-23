@@ -146,6 +146,7 @@ button[disabled=disabled], button:disabled {
 	color: white;
 	background-color: red;
 	border-radius: .1em .1em;
+    transition: 1s;
 }
 li{
 	line-height: normal;
