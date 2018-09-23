@@ -150,3 +150,21 @@ button[disabled=disabled], button:disabled {
 li{
 	line-height: normal;
 }
+#tabela-pacientes .paciente:hover{
+    background: #0c8cd3;
+    color: white;
+    transition: .5s;
+}
+
+#tabela-pacientes .paciente:active{
+    background: #04324c;
+    color: white;
+    transition: 1s;
+}
+
+.fadeout{
+    opacity: 0;
+    transition: .5s;
+    transform: scale(0);
+}
+
