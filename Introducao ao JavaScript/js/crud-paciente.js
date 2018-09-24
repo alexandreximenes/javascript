@@ -5,9 +5,11 @@ var tabela = document.querySelector("#tabela-pacientes");
  */
 tabela.addEventListener('dblclick', (e) => {
     let TR = e.target.parentNode;
-    TR.classList.add('fadeout');
     setTimeout(() => {
-        TR.remove();
+        if(confirm('Deseja realmente deletar este paciente ? ')){
+            TR.classList.add('fadeout');
+            TR.remove();
+        }
     }, 500);
 });
 
@@ -16,6 +18,7 @@ tabela.addEventListener('dblclick', (e) => {
  */
 tabela.addEventListener('click', (e) => {
     let tdNome = e.path[0].className;
+    console.log(tdNome);
     if(tdNome === 'info-nome'){
         let TR = e.target.parentNode;
 
@@ -23,13 +26,22 @@ tabela.addEventListener('click', (e) => {
 
         var pessoa = capturaPessoa(TR);
 
-        gerarPessoa(pessoa.nome, pessoa.peso, pessoa.altura, pessoa.gordura);
+        var paciente = getPaciente(pessoa.nome, pessoa.peso, pessoa.altura, pessoa.gordura);
+        adicionarPacienteNaTabela(paciente);
 
     }
 
     form.reset();
     form.nome.focus();
 
+});
+
+let body = document.querySelector("body");
+body.addEventListener('click', (e) => {
+    console.clear();
+    // console.log(e.screenX);
+    // console.log(e.screenY);
+    console.log(e.target);
 });
 
 tabela.addEventListener('mouseover', (e) => {
@@ -51,7 +63,7 @@ function capturaPessoa(TR) {
     let altura = TR.querySelector('.info-altura').textContent;
     let gordura = TR.querySelector('.info-gordura').textContent;
 
-    return getDadosPessoa(nome, peso, altura, gordura);
+    return getPaciente(nome, peso, altura, gordura);
 }
 
 /*

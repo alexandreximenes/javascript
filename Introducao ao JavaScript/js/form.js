@@ -10,7 +10,19 @@ function validaPaciente(pessoa){
     // console.log(pessoa);
     return erros;
 }
-function getDadosPessoa(nome, peso, altura, gordura){
+function getPaciente(form){
+
+    let pessoa = {
+        nome : form.nome.value,
+        peso : form.peso.value,
+        altura : form.altura.value,
+        gordura : form.gordura.value,
+        imc : (form.peso.value / (form.altura.value * form.altura.value)).toFixed(2) //this.peso / (this.altura * this.altura)).toFixed(2)
+    };
+    return pessoa;
+}
+
+function getPaciente(nome, peso, altura, gordura){
 
     let pessoa = {
         nome : nome,
@@ -29,29 +41,29 @@ document.querySelector('#adicionar-paciente')
          *
          * @type {{nome: *, altura: *, peso: *, gordura: *}}
          */
-
-        var gerou = gerarPessoa(form.nome.value, form.peso.value, form.altura.value, form.gordura.value);
+        var paciente = getPaciente(form);
+        var gerou = adicionarPacienteNaTabela(paciente);
         if(gerou){
             form.reset();
             form.nome.focus();
         }
     });
 
-function gerarPessoa(nome, peso, altura, gordura){
-    let pessoa = getDadosPessoa(nome, peso, altura, gordura);
-    if(pessoa != null){
-        let erros = validaPaciente(pessoa);
+function adicionarPacienteNaTabela(paciente){
+    //let pessoa = getPaciente(paciente.nome, paciente.peso, paciente.altura, paciente.gordura);
+    if(paciente != null){
+        let erros = validaPaciente(paciente);
         if(erros.length > 0) {
             console.log(erros);
             cria_li(erros);
             return false;
         }else{
-            criaTr(pessoa);
+            criaTr(paciente);
             ul.innerHTML = '';
             ul.classList.remove('erros');
 
             //using template string
-            console.log(`${pessoa.nome} tem ${pessoa.altura}mt de altura e ${pessoa.peso}Kg, com gordura de ${pessoa.gordura}, totalizando IMC de : ${pessoa.imc}`);
+            console.log(`${paciente.nome} tem ${paciente.altura}mt de altura e ${paciente.peso}Kg, com gordura de ${paciente.gordura}, totalizando IMC de : ${paciente.imc}`);
             return true;
         }
     }

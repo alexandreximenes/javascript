@@ -168,4 +168,11 @@ li{
     transition: .5s;
     transform: scale(0);
 }
-
+.pesquisa{
+    margin-bottom: 2em;
+}
+.pesquisa:focus{
+    border: .1em solid #0c8cd3;
+    background: #EEEEEE;
+    color:white;
+}

@@ -18,6 +18,8 @@
 		<main>
 			<section class="container">
 				<h2>Meus pacientes</h2>
+				<label for="pesquisa">Pesquisa : </label><input id="pesquisa" name="pesquisa" type="text" placeholder="digite o nome do seu paciente que você deseja procurar" class="campo pesquisa">
+
 				<table id="tabela">
 					<thead>
 						<tr>
@@ -69,7 +71,7 @@
 						</tr>
 					</tbody>
 				</table>
-
+                <button id="buscar-paciente" class="botao bto-principal">Buscar paciente</button>
 			</section>
             <ul class="ul"></ul>
 			<section class="container">
@@ -91,16 +93,18 @@
 						<label for="gordura">% de Gordura:</label>
 						<input id="gordura" name="gordura" type="text" placeholder="digite a porcentagem de gordura do seu paciente" class="campo campo-medio">
 					</div>
-			
+
 					<button id="adicionar-paciente" class="botao bto-principal">Adicionar</button>
 				</form>
 			</section>
-			
+
 		</main>
 
 		<script src="js/principal.js"> </script>
 		<script src="js/form.js"> </script>
 		<script src="js/crud-paciente.js"> </script>
+		<script src="js/pesquisa.js"> </script>
+		<script src="js/buscar-dados-server.js"> </script>
 
 	</body>
 </html>
