@@ -1,25 +1,14 @@
 let form = document.querySelector("#form-add");
 let ul = document.querySelector(".ul");
 
-function validaPaciente(pessoa){
+function validaPaciente(pessoa) {
     let erros = [];
     pessoa.nome == "" || pessoa.length <= 2 ? erros.push('Nome invalido!') : '';
-    pessoa.peso == "" || (pessoa.peso <= 0 || pessoa.peso > 1000) ? erros.push('Peso invalido!') :'';
-    pessoa.altura == ""  || (pessoa.altura <=0 || pessoa.altura >= 4.0)? erros.push('Altura invalida!'):'';
-    pessoa.gordura == ""  || pessoa.gordura < 0 || pessoa.gordura > pessoa.peso ? erros.push('Gordura invalida!') : '';
+    pessoa.peso == "" || (pessoa.peso <= 0 || pessoa.peso > 1000) ? erros.push('Peso invalido!') : '';
+    pessoa.altura == "" || (pessoa.altura <= 0 || pessoa.altura >= 4.0) ? erros.push('Altura invalida!') : '';
+    pessoa.gordura == "" || pessoa.gordura < 0 || pessoa.gordura > pessoa.peso ? erros.push('Gordura invalida!') : '';
     // console.log(pessoa);
     return erros;
-}
-function getPaciente(form){
-
-    let pessoa = {
-        nome : form.nome.value,
-        peso : form.peso.value,
-        altura : form.altura.value,
-        gordura : form.gordura.value,
-        imc : (form.peso.value / (form.altura.value * form.altura.value)).toFixed(2) //this.peso / (this.altura * this.altura)).toFixed(2)
-    };
-    return pessoa;
 }
 
 function getPaciente(nome, peso, altura, gordura){
@@ -41,7 +30,7 @@ document.querySelector('#adicionar-paciente')
          *
          * @type {{nome: *, altura: *, peso: *, gordura: *}}
          */
-        var paciente = getPaciente(form);
+        var paciente = getPaciente(form.nome.value, form.peso.value, form.altura.value, form.gordura.value);
         var gerou = adicionarPacienteNaTabela(paciente);
         if(gerou){
             form.reset();
