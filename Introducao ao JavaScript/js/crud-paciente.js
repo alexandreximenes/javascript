@@ -17,18 +17,17 @@ tabela.addEventListener('dblclick', (e) => {
  * Copia a linha (pessoa) clicada para a tabela
  */
 tabela.addEventListener('click', (e) => {
+    e.preventDefault();
     let tdNome = e.path[0].className;
     console.log(tdNome);
+    let TR = e.target.parentNode;
     if(tdNome === 'info-nome'){
-        let TR = e.target.parentNode;
-
-        let form = document.querySelector("#form-add");
 
         var pessoa = capturaPessoa(TR);
 
         var paciente = getPaciente(pessoa.nome, pessoa.peso, pessoa.altura, pessoa.gordura);
-        adicionarPacienteNaTabela(paciente);
 
+        adicionarPacienteNaTabela(paciente);
     }
 
     form.reset();
@@ -38,14 +37,20 @@ tabela.addEventListener('click', (e) => {
 
 let body = document.querySelector("body");
 body.addEventListener('click', (e) => {
-    console.clear();
+    //console.clear();
     // console.log(e.screenX);
     // console.log(e.screenY);
-    console.log(e.target);
+    console.log(e.target.parentNode);
+    insereDadosNoFormulario(e.target.parentNode);
 });
 
 tabela.addEventListener('mouseover', (e) => {
     let TR = e.target.parentNode;
+    // console.log(TR);
+    insereDadosNoFormulario(TR);
+});
+
+function insereDadosNoFormulario(TR){
     let form = document.querySelector("#form-add");
 
     var pessoa = capturaPessoa(TR);
@@ -55,8 +60,7 @@ tabela.addEventListener('mouseover', (e) => {
     form.altura.value = pessoa.altura;
     form.gordura.value = pessoa.gordura;
 
-});
-
+}
 function capturaPessoa(TR) {
     let nome = TR.querySelector('.info-nome').textContent;
     let peso = TR.querySelector('.info-peso').textContent;
