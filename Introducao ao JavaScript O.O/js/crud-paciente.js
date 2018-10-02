@@ -25,7 +25,7 @@ tabela.addEventListener('click', (e) => {
 
         var pessoa = capturaPessoa(TR);
 
-        var paciente = getPaciente(pessoa.nome, pessoa.peso, pessoa.altura, pessoa.gordura);
+        var paciente = getPaciente(pessoa.nome, pessoa.data, pessoa.peso, pessoa.altura, pessoa.gordura);
 
         adicionarPacienteNaTabela(paciente);
     }
@@ -56,6 +56,7 @@ function insereDadosNoFormulario(TR){
     var pessoa = capturaPessoa(TR);
 
     form.nome.value = pessoa.nome;
+    form.data.value = pessoa.data;
     form.peso.value = pessoa.peso;
     form.altura.value = pessoa.altura;
     form.gordura.value = pessoa.gordura;
@@ -63,11 +64,12 @@ function insereDadosNoFormulario(TR){
 }
 function capturaPessoa(TR) {
     let nome = TR.querySelector('.info-nome').textContent;
+    let data = TR.querySelector('.info-data-consulta').textContent;
     let peso = TR.querySelector('.info-peso').textContent;
     let altura = TR.querySelector('.info-altura').textContent;
     let gordura = TR.querySelector('.info-gordura').textContent;
 
-    return getPaciente(nome, peso, altura, gordura);
+    return getPaciente(nome, data, peso, altura, gordura);
 }
 
 /*
