@@ -5,6 +5,7 @@ $( () => {
     cronometro();
     reiniciarJogo();
     inicializaCorretorOrtografico();
+    // inserePlacar();
     $('#botao-reiniciar').click( reiniciarJogo );
 
 });

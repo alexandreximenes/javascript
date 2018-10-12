@@ -1,22 +1,31 @@
-$( () => {
-
+$(function() {
 });
 var corpoTabela = $('.placar').find('tbody');
-function inserePlacar(){
+
+function inserePlacar() {
     let numPalavras = $('#contador-palavras').text();
     let usuario = prompt("Qual seu nome: ");
-    let linha = `<tr>
-                    <td>${usuario}</td>
-                    <td>${numPalavras}</td>
-                    <td><a class="botao-remover" href="#"><i class="botao-remover small material-icons">delete</i></a></td>
-                </tr>`;
+    // let linha = `<tr>
+    //                 <td>${usuario}</td>
+    //                 <td>${numPalavras}</td>
+    //                 <td><a class="botao-remover" href="#"><i class="botao-remover small material-icons">delete</i></a></td>
+    //             </tr>`;
 
+    let linha = novaLinha(usuario, numPalavras);
+    linha.find('.botao-remover').click(removerTR);
     $('.placar').removeClass('placar');
     corpoTabela.prepend(linha);
 }
-$('.botao-remover');
 
-function novaLinha(usuario, numPalavras){
+function removerTR(e) {
+
+    e.preventDefault();
+    console.log($(this).closest('tr'));
+    console.log($(this).closest('.botao-remover'));
+    $(this).closest('tr').remove();
+};
+
+function novaLinha(usuario, numPalavras) {
     let tr = $("<tr>");
     let tdUsuario = $("<td>");
     let tdNumPalavras = $("<td>");
@@ -28,7 +37,6 @@ function novaLinha(usuario, numPalavras){
     let icone = $("<i>").addClass("small").addClass("material-icons").text("delete");
     link.append(icone);
     tdRemover.append(link);
-
 
     tr.append(tdUsuario);
     tr.append(tdNumPalavras);
