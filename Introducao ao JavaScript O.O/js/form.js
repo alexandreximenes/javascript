@@ -1,11 +1,9 @@
 let form = document.querySelector("#form-add");
 let ul = document.querySelector(".ul");
-let botaoAddPaciente = document.querySelector('#adicionar-paciente');
 
 function validaPaciente(pessoa) {
     let erros = [];
     pessoa.nome == "" || pessoa.length <= 2 ? erros.push('Nome invalido!') : '';
-    pessoa.data == ""  ? erros.push('Data invalido!') : '';
     pessoa.peso == "" || (pessoa.peso <= 0 || pessoa.peso > 1000) ? erros.push('Peso invalido!') : '';
     pessoa.altura == "" || (pessoa.altura <= 0 || pessoa.altura >= 4.0) ? erros.push('Altura invalida!') : '';
     pessoa.gordura == "" || pessoa.gordura < 0 || pessoa.gordura > pessoa.peso ? erros.push('Gordura invalida!') : '';
@@ -13,11 +11,10 @@ function validaPaciente(pessoa) {
     return erros;
 }
 
-function getPaciente(nome, data, peso, altura, gordura){
+function getPaciente(nome, peso, altura, gordura){
 
     let pessoa = {
         nome : nome,
-        data : data,
         peso : peso,
         altura : altura,
         gordura : gordura,
@@ -26,13 +23,14 @@ function getPaciente(nome, data, peso, altura, gordura){
     return pessoa;
 }
 
-botaoAddPaciente.addEventListener('click', (e) => {
+document.querySelector('#adicionar-paciente')
+    .addEventListener('click', (e) => {
         e.preventDefault();
         /**
          *
-         * @type {{nome: *, data: *, altura: *, peso: *, gordura: *}}
+         * @type {{nome: *, altura: *, peso: *, gordura: *}}
          */
-        var paciente = getPaciente(form.nome.value, form.data.value, form.peso.value, form.altura.value, form.gordura.value);
+        var paciente = getPaciente(form.nome.value, form.peso.value, form.altura.value, form.gordura.value);
         var gerou = adicionarPacienteNaTabela(paciente);
         if(gerou){
             form.reset();
@@ -54,7 +52,7 @@ function adicionarPacienteNaTabela(paciente){
             ul.classList.remove('erros');
 
             //using template string
-            console.log(`${paciente.data} - ${paciente.nome} tem ${paciente.altura}mt de altura e ${paciente.peso}Kg, com gordura de ${paciente.gordura}, totalizando IMC de : ${paciente.imc}`);
+            console.log(`${paciente.nome} tem ${paciente.altura}mt de altura e ${paciente.peso}Kg, com gordura de ${paciente.gordura}, totalizando IMC de : ${paciente.imc}`);
             return true;
         }
     }
@@ -96,7 +94,6 @@ function criaTr(pessoa){
     }
 
     let nomeTd = montarTD('info-nome', pessoa.nome);//document.createElement("td");
-    let dataTd = montarTD('info-data-consulta', pessoa.data);//document.createElement("td");
     let pesoTd = montarTD('info-peso', pessoa.peso);//document.createElement("td");
     let alturaTd = montarTD('info-altura', pessoa.altura);//document.createElement("td");
     let gorduraTd = montarTD('info-gordura', pessoa.gordura);//document.createElement("td");
@@ -109,7 +106,6 @@ function criaTr(pessoa){
      * @see nomeTd, pesoTd, alturaTd, gorduraTd, imcTd
      */
     pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(dataTd);
     pacienteTr.appendChild(pesoTd);
     pacienteTr.appendChild(alturaTd);
     pacienteTr.appendChild(gorduraTd);
