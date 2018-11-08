@@ -1,7 +1,7 @@
 class PacienteLog{
     constructor(nome, data, peso, altura, gordura){
         this._nome = nome;
-        this._data = new Date(data.getTime()).toLocaleDateString();
+        this._data = new Date(data.getTime());//.toLocaleDateString();
         this._peso = peso;
         this._altura = altura;
         this._gordura = gordura;
