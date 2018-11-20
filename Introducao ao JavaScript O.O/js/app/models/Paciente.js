@@ -1,5 +1,8 @@
-class PacienteLog{
+class Paciente{
     constructor(nome, data, peso, altura, gordura){
+        let erros = this._validarPaciente(nome, data, peso, altura, gordura);
+        if(erros > 0) throw new Error(erros);
+
         this._nome = nome;
         this._data = new Date(data.getTime());//.toLocaleDateString();
         this._peso = peso;
@@ -7,6 +10,17 @@ class PacienteLog{
         this._gordura = gordura;
         this._imc = this.obterIMC();
         Object.freeze(this);
+    }
+
+    _validarPaciente(nome, data, peso, altura, gordura){
+        let erros = [];
+        nome == "" || nome.length <= 2 ? erros.push('Nome invalido!') : '';
+        data == "" ? erros.push('Nome invalido!') : '';
+        peso == "" || (peso <= 0 || peso > 1000) ? erros.push('Peso invalido!') : '';
+        altura == "" || (altura <= 0 || altura >= 4.0) ? erros.push('Altura invalida!') : '';
+        gordura == "" || gordura < 0 || gordura > peso ? erros.push('Gordura invalida!') : '';
+        return erros;
+
     }
 
     obterIMC(){
