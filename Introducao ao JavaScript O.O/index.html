@@ -19,6 +19,7 @@
     <ul class="ul"></ul>
     <section class="container">
         <h2 id="titulo-form">Adicionar novo paciente</h2>
+        <div id="mensagem-view"></div>
         <form id="form-add" onsubmit="pacienteLogController.adiciona(event)">
             <div class="">
                 <label for="nome">Nome:</label>
@@ -120,7 +121,10 @@
 <script src="js/app/controllers/PacienteController.js"></script>
 <script src="js/app/helpers/DateHelper.js"></script>
 <script src="js/app/models/ListaPacientes.js"></script>
+<script src="js/app/views/View.js"></script>
 <script src="js/app/views/PacienteView.js"></script>
+<script src="js/app/models/Mensagem.js"></script>
+<script src="js/app/views/MensagemView.js"></script>
 <script>
     let pacienteLogController = new PacienteController();
 </script>

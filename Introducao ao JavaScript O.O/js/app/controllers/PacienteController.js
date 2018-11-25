@@ -10,6 +10,8 @@ class PacienteController {
         this._listaPacientes = new ListaPacientes();
         this._pacienteView = new PacienteView( $('#pacientesView') );
         this._pacienteView.update(this._listaPacientes);
+        this._mensagem = new Mensagem();
+        this._mensagemView = new MensagemView($('#mensagem-view'));
     }
 
     adiciona(event) {
@@ -18,6 +20,8 @@ class PacienteController {
         this._limpaFormulario();
         this._listaPacientes.adiciona( paciente );
         this._pacienteView.update(this._listaPacientes);
+        this._mensagem.texto = 'Paciente adicionado com sucesso';
+        this._mensagemView.update(this._mensagem);
 
         console.log(DateHelper.dataParaTexto(paciente.data));
         console.log(this._listaPacientes.pacientes);

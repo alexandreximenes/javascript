@@ -1,7 +1,7 @@
-class PacienteView {
+class PacienteView extends View{
 
     constructor(elemento) {
-        this._elemento = elemento;
+        super(elemento)
     }
 
     _template(model) {
@@ -29,11 +29,14 @@ class PacienteView {
                             <td class="info-imc"> ${n.imc} </td>
                          </tr>
                 `).join('')}
+            </tbody> 
+            <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: left">Total de pacientes: </td>
+                        <td> ${model.pacientes.length}</td>
+                    </tr>
+            </tfoot>
         `;
-    }
 
-    update(model) {
-        if(model.pacientes.length>0)
-            this._elemento.innerHTML = this._template(model);
     }
 }
