@@ -1,29 +1,31 @@
 class NegociacaoController{
 
     constructor(){
+        let form = document.querySelector('.form');
         let $ = document.querySelector.bind(document);
         this._data = $('#data');
         this._quantidade = $('#quantidade');
         this._valor = $('#valor');
-        this._negociacoes = [];
+        this._listaNegociacoes = new ListaNegociacoes();
     }
     
     adiciona(event){
         event.preventDefault();
+        this._listaNegociacoes.adiciona(this._criaNegociacao())
+        this._limpaFormulario();
+        console.log(this._listaNegociacoes);
+    }
 
+    _criaNegociacao(){
         let data = DateHelper.textoParaData(this._data.value);
-        console.log(data);
-        let negociacao = new Negociacao(
+        return new Negociacao(
                 data, 
                 this._quantidade.value, 
                 this._valor.value
             );
+    }
 
-        console.log(DateHelper.textoParaData(this._data.value));
-        // console.log(DateHelper.dataParaTexto(data));
-        
-        this._negociacoes.push(negociacao);
-
-        console.log(this._negociacoes);
+    _limpaFormulario(){
+        console.log(this.form); 
     }
 }
